@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import * as movieActions from "../actions/movieActions"
 
 const Movie = (props) => {
-    console.log(props)
+    // console.log(props)
     const { id } = useParams();
     const { push } = useHistory();
-    const { movies, deleteMovie } = props;
+    const { deleteMovie } = props;
+    const { movies } = props.movieReducer
     
     const deleteClick = id => {
         deleteMovie(id)

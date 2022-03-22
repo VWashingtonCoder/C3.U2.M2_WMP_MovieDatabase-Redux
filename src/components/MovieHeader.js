@@ -4,8 +4,9 @@ import { connect } from "react-redux";
 
 const MovieHeader = (props) => {
     // console.log(props)
-    const { appTitle } = props
-    const displayFavorites = true;
+    const { appTitle } = props.movieReducer
+    const { displayFavorites } = props.favoritesReducer
+    
     
     return(<div className="table-title">
         <div className="row">

@@ -4,7 +4,8 @@ import MovieListItem from './MovieListItem';
 import MovieFooter from './MovieFooter';
 
 const MovieList = (props)=> {
-    const { movies } = props
+    const { movies } = props.movieReducer
+    console.log(props)
 
     return (
         <div className="col">
