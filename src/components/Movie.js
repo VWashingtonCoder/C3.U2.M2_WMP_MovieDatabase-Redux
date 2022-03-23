@@ -1,22 +1,31 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
-import * as movieActions from "../actions/movieActions"
+import { deleteMovie } from "../actions/movieActions"
+import { addFavorite } from "../actions/favoritesActions"
+import e from 'cors';
+
 
 const Movie = (props) => {
-    // console.log(props)
     const { id } = useParams();
     const { push } = useHistory();
-    const { deleteMovie } = props;
+    const { deleteMovie, addFavorite } = props;
     const { movies } = props.movieReducer
-    
-    const deleteClick = id => {
-        deleteMovie(id)
+    const { displayFavorites } = props.favoritesReducer
+
+    const movie = movies.find(movie=>movie.id===Number(id));
+
+    const deleteClick = e => {
+        e.preventDefault()
+        deleteMovie(movie.id)
         push("/movies")
     }
 
-    const movie = movies.find(movie=>movie.id===Number(id));
-    
+    const addClick = e => {
+        e.preventDefault()
+        addFavorite(movie)
+    }
+
     return(<div className="modal-page col">
         <div className="modal-dialog">
             <div className="modal-content">
@@ -46,7 +55,13 @@ const Movie = (props) => {
                         </section>
                         
                         <section>
-                            <span className="m-2 btn btn-dark">Favorite</span>
+                            {displayFavorites ? 
+                                <span className="m-2 btn btn-dark">Favorite</span> : <span/> 
+                            }
+                            
+                            <span className="add-fav m-2 btn" onClick={addClick}>Add Favorite</span>
+                            
+                            
                             <span className="delete">
                                 <input type="button" className="m-2 btn btn-danger" value="Delete" onClick={deleteClick}/>
                             </span>
@@ -58,4 +73,4 @@ const Movie = (props) => {
     </div>);
 }
 
-export default connect(state => state, movieActions) (Movie);
+export default connect(state => state, { deleteMovie, addFavorite }) (Movie);
