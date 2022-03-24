@@ -11,14 +11,19 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case (TOGGLE_FAVORITES):
-            return !state.displayFavorites
+            return ({
+                ...state,
+                displayFavorites: !state.displayFavorites
+            })
         case (ADD_FAVORITE):
             return({
+                ...state,
                 favorites: [...state.favorites, action.payload]
             })
         case (REMOVE_FAVORITE):
             return({
-                favorites: state.favorites.filter(fav =>{action.payload !== fav.id})
+                ...state,
+                favorites: [state.favorites.filter(fav => {action.payload.id !== fav.id})]
             })
         default:
             return state;

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { toggleFavorites } from "../actions/favoritesActions"
 
+
 const MovieHeader = (props) => {
-    console.log(props)
     const { toggleFavorites } = props
     const { appTitle } = props.movieReducer
     const { displayFavorites } = props.favoritesReducer
@@ -13,7 +13,6 @@ const MovieHeader = (props) => {
         e.preventDefault()
         toggleFavorites()
     }
-    
 
     return(<div className="table-title">
         <div className="row">
@@ -23,7 +22,7 @@ const MovieHeader = (props) => {
         <div className="col-sm-6 headerBar">
             <div className="btn btn-sm btn-primary">
                 <span onClick={toggleClick}>
-                    { displayFavorites ? "Hide" : "Show"} Favorites
+                    { displayFavorites ? "Hide" : "Show" } Favorites
                 </span>
             </div>
             <Link to="/movies" className="btn btn-sm btn-primary">

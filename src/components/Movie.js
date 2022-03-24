@@ -3,8 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import { deleteMovie } from "../actions/movieActions"
 import { addFavorite } from "../actions/favoritesActions"
-import e from 'cors';
-
 
 const Movie = (props) => {
     const { id } = useParams();
@@ -25,7 +23,7 @@ const Movie = (props) => {
         e.preventDefault()
         addFavorite(movie)
     }
-
+    console.log(movies)
     return(<div className="modal-page col">
         <div className="modal-dialog">
             <div className="modal-content">
